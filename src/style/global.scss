@@ -1,4 +1,5 @@
 body {
+  margin: 0;
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -7,7 +8,7 @@ body {
 }
 
 label {
-  font-weight: 700;
+  font-weight: 100;
 }
 
 html {
@@ -23,4 +24,54 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+}
+.el-scrollbar__bar.is-horizontal {
+  display: none;
+}
+
+.scrollbar-wrapper {
+  overflow-x: hidden !important;
+}
+.el-scrollbar {
+  height: 100%;
+}
+.el-menu {
+  border-right: none;
+}
+
+/* 确保 Element UI 的折叠样式生效 */
+.el-menu--collapse .el-submenu__title span,
+.el-menu--collapse .el-menu-item span {
+  display: none !important;  /* 隐藏文字 */
+}
+
+.el-menu--collapse .el-submenu__title .el-submenu__icon-arrow {
+  display: none !important;  /* 隐藏箭头 */
+}
+
+/* 确保图标居中 */
+.el-menu--collapse .el-submenu__title i,
+.el-menu--collapse .el-menu-item i {
+  margin-right: 0 !important;
+  width: 100%;
+  text-align: center;
+}
+
+/* 调整折叠后的宽度 */
+.el-menu--collapse {
+  width: 64px !important;
+}
+
+/* 展开状态的样式 */
+.el-submenu__title span,
+.el-menu-item span {
+  display: inline-block;
+  transition: opacity 0.3s;
+}
+
+/* 如果图标和文字间距有问题 */
+.el-menu-item i,
+.el-submenu__title i {
+  margin-right: 10px;
+  font-size: 18px;
 }
