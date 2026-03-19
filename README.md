@@ -1,7 +1,9 @@
 # test-vue
 
 ## download
-
+```
+git clone https://github.com/Aurora-chi/VueWarehouse/edit/master.git
+```
 
 ## Project setup
 ```
