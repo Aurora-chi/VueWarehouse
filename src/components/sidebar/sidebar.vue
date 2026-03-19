@@ -2,6 +2,7 @@
   <div class="menu">
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
+        class="custom-menu"
         :collapse="isCollapse"
         background-color="#0F1E3D"
         text-color="#bfcbd9"
@@ -11,12 +12,7 @@
         :router="true"
         :default-active="$route.path"
       >
-        <sidebarItme
-          v-for="route in routers"
-          :key="route.id"
-          :item="route"
-          :base-path="route.path"
-        />
+        <sidebarItme v-for="route in routers" :key="route.id" :item="route" />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -28,11 +24,6 @@ import sidebarItme from "./sidebarItme.vue";
 
 export default {
   name: "Sidebar",
-  computed: {
-    ...mapGetters({
-      routers: "routers",
-    }),
-  },
   components: { sidebarItme },
   props: {
     isCollapse: {
@@ -40,10 +31,18 @@ export default {
       default: false,
     },
   },
+  created() {
+    this.$store.dispatch("GetRouters");
+  },
+  computed: {
+    ...mapGetters({
+      routers: "routers",
+    }),
+  },
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 .menu {
   height: 100%;
 }

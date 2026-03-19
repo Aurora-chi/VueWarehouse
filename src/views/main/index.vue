@@ -20,7 +20,9 @@
       </div>
       <div class="content-right">
         <navigator class="navigator" @update:collapse="handleCollapse" />
-        <div class="router-content"></div>
+        <div class="router-content">
+          <router-view />
+        </div>
       </div>
     </div>
   </div>
@@ -35,11 +37,10 @@ export default {
     return {
       isCollapse: false,
       routers: [],
+      userInfor: [],
     };
   },
-  mounted() {
-    this.$store.dispatch("GetRouters");
-  },
+  mounted() {},
   methods: {
     handleCollapse(value) {
       this.isCollapse = value;
@@ -79,6 +80,7 @@ export default {
       }
     }
     .top {
+      cursor: pointer;
       height: 50px;
       background-color: #f65b23;
       img {

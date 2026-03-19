@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" id="login">
     <el-row class="login-bg">
       <el-col :span="12" class="bg-left"></el-col>
       <el-col :span="12" class="bg-right"></el-col>
@@ -30,7 +30,7 @@
                 v-model="loginForm.loginName"
                 type="text"
                 auto-complete="off"
-                placeholder="验证码"
+                placeholder="账号"
               ></el-input>
             </el-form-item>
             <el-form-item>
@@ -39,7 +39,7 @@
                 v-model="loginForm.password"
                 type="password"
                 auto-complete="off"
-                placeholder="验证码"
+                placeholder="密码"
               ></el-input>
             </el-form-item>
             <el-form-item>
@@ -268,7 +268,7 @@ export default {
 }
 </style>
 <style>
-.el-input input {
+#login .el-input input {
   background: #fffaf9;
   border-radius: 8px;
   border: 1px solid #f75924;

@@ -26,7 +26,7 @@ export default new Vuex.Store({
   getters: {
     token: state => state.token,
     userInfo: state => state.userInfo,
-    name: state => state.name,
+    userName: state => state.name,
     loginName: state => state.loginName,
     email: state => state.email,
     phone: state => state.phone,
@@ -114,7 +114,6 @@ export default new Vuex.Store({
     async GetInfo({ commit }) {
       try {
         const res = await getInfo()
-        console.log('用户信息返回：', res) // 调试用，可以删除
 
         // 根据你的数据结构，数据在 res.data 中
         const data = res.data || res
@@ -164,7 +163,6 @@ export default new Vuex.Store({
       try {
         const res = await getRouters()
         const tree = buildMenuTree(res.data)
-        console.log(tree)
         commit("SET_ROUTERS", tree)
       } catch (error) {
         console.error('获取路由失败：', error)

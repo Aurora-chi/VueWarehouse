@@ -9,7 +9,13 @@
       </div>
       <div class="title">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/main' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item
+            v-for="(item, index) in breadcrumbList"
+            :key="index"
+            :to="item.path"
+          >
+            {{ item.name }}
+          </el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
@@ -26,9 +32,14 @@
         @visible-change="handleDropdownVisible"
       >
         <div class="user_info">
-          <el-avatar shape="square" :size="30" fit="cover" :src="tx">
+          <el-avatar
+            shape="square"
+            :size="30"
+            fit="cover"
+            :src="avatarUrl ? user_avatar : tx"
+          >
           </el-avatar>
-          <div class="name">用户名</div>
+          <div class="name">{{ userName }}</div>
           <div>
             <i
               :class="
@@ -56,19 +67,68 @@ export default {
       isFullScreen: false,
       exitFullScreenIcon: require("@/assets/images/navigation/outFull.svg"),
       fullScreenIcon: require("@/assets/images/navigation/fullScreen.svg"),
+      url: "http://192.168.0.114:9012",
       tx: require("@/assets/images/navigation/tx.svg"),
+      user_avatar: "",
+      userInfor: [],
       userName: "",
+      breadcrumbList: [],
     };
   },
-  mounted() {
-    this.get_userInfor();
+  async created() {
+    try {
+      this.loading = true;
+      // 等待两个请求都完成
+      await Promise.all([this.$store.dispatch("GetInfo")]);
+      // 数据加载完成后获取用户信息
+      this.get_userInfor();
+      this.generateBreadcrumb(); // 生成面包屑
+    } catch (error) {
+      console.error("初始化失败:", error);
+    } finally {
+      this.loading = false;
+    }
   },
+  computed: {
+    avatarUrl() {
+      if (this.user_avatar) {
+        return true;
+      }
+      return false;
+    },
+  },
+  watch: {
+    $route: {
+      handler() {
+        this.generateBreadcrumb();
+      },
+      immediate: true, // 立即执行一次，以便在组件创建时也能触发
+    },
+  },
+
   methods: {
+    // 生成面包屑
+    generateBreadcrumb() {
+      const routes = this.$route.matched;
+      this.breadcrumbList = routes
+        .map((route) => {
+          return {
+            name: route.name,
+            path: route.path,
+          };
+        })
+        .filter((item) => item.name); // 过滤掉没有名称的
+    },
+    get_userInfor() {
+      this.userInfor = this.$store.state.userInfo;
+      this.userName = this.userInfor.userName;
+      const avatar = this.userInfor.avatar;
+      this.user_avatar = this.url + avatar;
+    },
     collapse() {
       this.isCollapse = !this.isCollapse;
       this.$emit("update:collapse", this.isCollapse);
     },
-    get_userInfor() {},
     // 登出
     async out_login() {
       try {
@@ -210,27 +270,6 @@ export default {
   cursor: pointer;
   i {
     transition: all 0.3s ease 0s;
-  }
-}
-</style>
-<style lang="scss">
-.el-breadcrumb {
-  .el-breadcrumb__item {
-    .el-breadcrumb__inner {
-      color: #fff !important;
-      font-weight: normal;
-
-      &:hover {
-        color: #0f53e0 !important;
-      }
-    }
-
-    &:last-child:hover {
-      .el-breadcrumb__inner {
-        color: #604d4b !important;
-        font-weight: bold;
-      }
-    }
   }
 }
 </style>

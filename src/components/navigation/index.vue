@@ -20,6 +20,7 @@ export default {
       isCollapse: false,
     };
   },
+
   methods: {
     handleCollapse(value) {
       this.isCollapse = value;

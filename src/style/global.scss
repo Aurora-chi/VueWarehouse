@@ -4,11 +4,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  color: #000;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
 
 label {
-  font-weight: 100;
+  font-weight: 120;
+  color: #000 !important;
 }
 
 html {
@@ -74,4 +76,82 @@ html {
 .el-submenu__title i {
   margin-right: 10px;
   font-size: 18px;
+}
+
+.custom-menu {
+  /* 1. 激活的菜单项 */
+  .el-menu-item.is-active {
+    color: #fff !important;
+    background-color: #ff6801 !important;
+
+    i {
+      color: #fff !important;
+    }
+  }
+
+  /* 2. 激活的子菜单标题 */
+  .el-submenu.is-opened {
+    > .el-submenu__title {
+      background-color: #ffffff33 !important;
+      span {
+        color: #ff6801 !important;
+      }
+
+      /* 自定义图标在激活状态 */
+      .custom-icon {
+        filter: brightness(0) saturate(100%) invert(37%) sepia(93%)
+          saturate(2000%) hue-rotate(1deg) brightness(101%) contrast(101%);
+      }
+    }
+  }
+
+  /* 3. 悬浮效果（保持不变） */
+  .el-submenu__title{
+    border-left:5px solid transparent;
+    &:hover {
+    color: #ffffff !important;
+    background-color: #00000033 !important;
+    border-left:5px solid #ff6801;
+    span {
+      color: #ffffff !important;
+    }
+
+    .custom-icon {
+      filter: brightness(0) saturate(100%) invert(1);
+    }
+  }
+}
+
+  .el-menu-item:hover {
+    color: #ffffff !important;
+    background-color: #00000033 !important;
+
+    i {
+      color: #ffffff !important;
+    }
+  }
+}
+
+.el-breadcrumb {
+  .el-breadcrumb__item {
+    .el-breadcrumb__inner {
+      color: #fff !important;
+      font-weight: normal;
+
+      &:hover {
+        color: #0f53e0 !important;
+      }
+    }
+
+    &:last-child:hover {
+      .el-breadcrumb__inner {
+        color: #604d4b !important;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.el-form-item__label{
+  padding: 0 !important;
 }

@@ -16,16 +16,11 @@
         v-for="child in item.children"
         :key="child.id"
         :item="child"
-        :base-path="child.componentPath"
       />
     </el-submenu>
 
     <!-- 没有子菜单 -->
-    <el-menu-item
-      v-else
-      :key="item.id"
-      :index="item.componentPath || item.id.toString()"
-    >
+    <el-menu-item v-else :key="item.id" :index="generateMenuPath(item)">
       <i :class="getMenuIcon(item.menuName)" />
       <span slot="title">{{ item.menuName }}</span>
     </el-menu-item>
@@ -40,10 +35,6 @@ export default {
     item: {
       type: Object,
       required: true,
-    },
-    basePath: {
-      type: String,
-      default: "",
     },
   },
 
@@ -61,6 +52,35 @@ export default {
   },
 
   methods: {
+    generateMenuPath(menu) {
+      if (!menu.path) return "";
+
+      // 如果path以/开头，直接使用
+      if (menu.path.startsWith("/")) {
+        return menu.path;
+      }
+
+      // 根据父菜单类型生成完整路径
+      let basePath = "";
+      if (menu.parentId === 1) {
+        // 系统管理下的子菜单
+        basePath = "/system";
+      } else if (menu.parentId === 9) {
+        // 网站配置下的子菜单
+        basePath = "/webConfig";
+      } else if (menu.parentId === 14) {
+        // 网站业务下的子菜单
+        basePath = "/webBusiness";
+      } else if (menu.parentId === 31) {
+        // 服务与支持下的子菜单
+        basePath = "/webConfig/support";
+      } else if (menu.parentId === 23) {
+        // 关于我们下的子菜单
+        basePath = "/webConfig/about";
+      }
+
+      return basePath ? `${basePath}/${menu.path}` : `/${menu.path}`;
+    },
     getMenuIcon(menu) {
       // 3. 根据菜单名匹配图标
       return this.iconMap[menu] || "el-icon-document";
@@ -69,7 +89,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .el-icon-xtgl,
 .el-icon-wzpz,
 .el-icon-wzyw {

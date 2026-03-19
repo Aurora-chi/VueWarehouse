@@ -3,7 +3,7 @@ import { Message, MessageBox } from 'element-ui'
 import Cookies from 'js-cookie'
 import router from '@/router'  // 导入 router 实例
 
-const url = "192.168.0.127:9012"
+const url = "192.168.0.114:9012"
 
 // 创建 axios 实例
 const service = axios.create({
