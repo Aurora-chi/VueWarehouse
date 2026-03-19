@@ -2,7 +2,7 @@
 
 ## download
 ```
-git clone https://github.com/Aurora-chi/VueWarehouse.git
+git clone -b master https://github.com/Aurora-chi/VueWarehouse.git
 ```
 
 ## Project setup
