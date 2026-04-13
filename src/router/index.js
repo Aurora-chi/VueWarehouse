@@ -16,6 +16,11 @@ const routes = [
     redirect: "/login"
   },
   {
+    path: '/test',
+    name: 'test',
+    component: () => import('@/views/test.vue')
+  },
+  {
     path: "/main",
     name: "首页",
     component: UserMain,
@@ -60,30 +65,8 @@ const routes = [
           { path: "/webBusiness/message", name: "客户留言管理", component: () => import('@/views/webBusiness/message/index.vue') },
         ]
       },
+      { path: "/profile", name: "个人中心", component: () => import('@/views/main/profile/index.vue') },
     ],
-    // children: [
-    //   { path: "/system/menu", component: () => import('@/views/system/menu/index.vue') },
-    //   { path: "/system/log", component: () => import('@/views/system/log/index.vue') },
-    //   { path: "/system/dict", component: () => import('@/views/system/dict/index.vue') },
-    //   { path: "/system/role", component: () => import('@/views/system/role/index.vue') },
-    //   { path: "/system/user", component: () => import('@/views/system/user/index.vue') },
-    //   { path: "/webConfig/support/standard", component: () => import('@/views/webConfig/support/standard/index.vue') },
-    //   { path: "/webConfig/support/customerCases", component: () => import('@/views/webConfig/support/customerCases/index.vue') },
-    //   { path: "/webConfig/support/customerService", component: () => import('@/views/webConfig/support/customerService/index.vue') },
-    //   { path: "/webConfig/support/faq", component: () => import('@/views/webConfig/support/faq/index.vue') },
-    //   { path: "/webConfig/support/salesman", component: () => import('@/views/webConfig/support/salesman/index.vue') },
-    //   { path: "/webConfig/news", component: () => import('@/views/webConfig/news/index.vue') },
-    //   { path: "/webConfig/project", component: () => import('@/views/webConfig/project/index.vue') },
-    //   { path: "/webConfig/product", component: () => import('@/views/webConfig/product/index.vue') },
-    //   { path: "/webConfig/about/info", component: () => import('@/views/webConfig/about/info/index.vue') },
-    //   { path: "/webConfig/about/profile", component: () => import('@/views/webConfig/about/profile/index.vue') },
-    //   { path: "/webConfig/about/certificates", component: () => import('@/views/webConfig/about/certificates/index.vue') },
-    //   { path: "/webConfig/about/history", component: () => import('@/views/webConfig/about/history/index.vue') },
-    //   { path: "/webConfig/metadata", component: () => import('@/views/webConfig/metadata/index.vue') },
-    //   { path: "/webConfig/image", component: () => import('@/views/webConfig/image/index.vue') },
-    //   { path: "/webConfig/navigation", component: () => import('@/views/webConfig/navigation/index.vue') },
-    //   { path: "/webBusiness/message", component: () => import('@/views/webBusiness/message/index.vue') },
-    // ],
   }
 ]
 

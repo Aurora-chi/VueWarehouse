@@ -13,18 +13,11 @@
 export default {
   name: "addBtn",
   data() {
-    return {
-      isExpand: false,
-    };
+    return {};
   },
   methods: {
     toggleExpandAll() {
-      if (this.isExpand) {
-        console.log("折叠");
-      } else {
-        console.log("展开");
-      }
-      this.isExpand = !this.isExpand;
+      this.$emit("updata:expand");
     },
   },
 };

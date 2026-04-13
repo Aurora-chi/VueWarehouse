@@ -2,7 +2,7 @@
   <el-button
     type="primary"
     icon="el-icon-plus"
-    @click="addZhu"
+    @click="addNew"
     class="el-button"
     >新增</el-button
   >
@@ -15,8 +15,8 @@ export default {
     return {};
   },
   methods: {
-    addZhu() {
-      console.log("新增");
+    addNew() {
+      this.$emit("updata:addNew", true);
     },
   },
 };

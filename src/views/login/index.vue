@@ -24,7 +24,7 @@
             :rules="loginRules"
             class="login-form"
           >
-            <el-form-item>
+            <el-form-item prop="loginName">
               <label>账号</label>
               <el-input
                 v-model="loginForm.loginName"
@@ -33,7 +33,7 @@
                 placeholder="账号"
               ></el-input>
             </el-form-item>
-            <el-form-item>
+            <el-form-item prop="password">
               <label>密码</label>
               <el-input
                 v-model="loginForm.password"
@@ -42,7 +42,7 @@
                 placeholder="密码"
               ></el-input>
             </el-form-item>
-            <el-form-item>
+            <el-form-item prop="captcha">
               <div><label>验证码</label></div>
               <el-input
                 v-model="loginForm.captcha"

@@ -36,7 +36,6 @@ export default {
     return {
       tabs: [],
       activeTab: "",
-      maxTabs: 10,
       dynamicMenus: [], // 从 store 获取的动态菜单
     };
   },
@@ -63,12 +62,6 @@ export default {
         this.activeTab = route.path;
         this.scrollToActiveTab();
       } else {
-        if (this.tabs.length >= this.maxTabs) {
-          this.$message.warning(
-            `最多只能打开${this.maxTabs}个标签页,刷新页面重置标签页数`
-          );
-          return;
-        }
         const tabInfo = route;
         const newTab = {
           title: tabInfo.name,
@@ -152,23 +145,23 @@ export default {
   user-select: none;
 }
 .tabs {
-  width: 100%;
+  max-width: 100%;
   height: 40px;
   background-color: #f5f5f5;
   border-bottom: 1px solid #e8e8e8;
   display: flex;
   align-items: center;
-  padding: 0 8px;
-  overflow: hidden;
+  padding: 0 0 0 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 
   .tabs-container {
-    flex: 1;
     display: flex;
     align-items: center;
     height: 100%;
-    position: relative;
-    margin: 0 8px;
+    margin: 0 0 0 8px;
+    flex-shrink: 0;
   }
 
   .tab-item {
@@ -186,6 +179,7 @@ export default {
     transition: all 0.2s ease;
     position: relative;
     white-space: nowrap;
+    flex-shrink: 0;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 
     &:hover {

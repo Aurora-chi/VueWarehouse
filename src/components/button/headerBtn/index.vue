@@ -1,7 +1,7 @@
 <template>
   <div>
-    <addBtn />
-    <expandBtn />
+    <addBtn @updata:addNew="addNew" />
+    <expandBtn @updata:expand="toggleExpandAll" />
   </div>
 </template>
 
@@ -11,6 +11,14 @@ import expandBtn from "@/components/button/headerBtn/expandBtn/index.vue";
 export default {
   name: "headerBtn",
   components: { addBtn, expandBtn },
+  methods: {
+    addNew() {
+      this.$emit("updata:addNew");
+    },
+    toggleExpandAll() {
+      this.$emit("updata:expand");
+    },
+  },
 };
 </script>
 

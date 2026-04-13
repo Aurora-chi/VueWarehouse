@@ -42,10 +42,18 @@ export function logout() {
 }
 
 // 获取路由信息
-
 export function getRouters() {
     return request({
         url: '/manage/menu/getRouters',
         method: 'post'
+    })
+}
+
+// 获取树形导航
+export function getNavigationTree() {
+    return request({
+        url: '/web/navigation/getNavigationTree',
+        method: 'post',
+        data: {}
     })
 }

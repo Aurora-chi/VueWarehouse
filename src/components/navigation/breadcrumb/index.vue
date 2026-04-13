@@ -60,10 +60,15 @@
 <script>
 export default {
   name: "breadcrumb",
+  props: {
+    isCollapse: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       dropdownVisible: false,
-      isCollapse: false,
       isFullScreen: false,
       exitFullScreenIcon: require("@/assets/images/navigation/outFull.svg"),
       fullScreenIcon: require("@/assets/images/navigation/fullScreen.svg"),
@@ -92,9 +97,11 @@ export default {
   computed: {
     avatarUrl() {
       if (this.user_avatar) {
+        console.log(this.user_avatar);
         return true;
+      } else {
+        return false;
       }
-      return false;
     },
   },
   watch: {
@@ -122,12 +129,12 @@ export default {
     get_userInfor() {
       this.userInfor = this.$store.state.userInfo;
       this.userName = this.userInfor.userName;
-      const avatar = this.userInfor.avatar;
-      this.user_avatar = this.url + avatar;
+      if (this.userInfor.avatar) {
+        this.user_avatar = this.url + this.userInfor.avatar;
+      }
     },
     collapse() {
-      this.isCollapse = !this.isCollapse;
-      this.$emit("update:collapse", this.isCollapse);
+      this.$emit("update:collapse", !this.isCollapse);
     },
     // 登出
     async out_login() {
@@ -137,6 +144,10 @@ export default {
       } catch (e) {
         console.log(e);
       }
+    },
+    // 个人中心
+    goToProfile() {
+      this.$router.push("/profile");
     },
     // 切换全屏
     toggleFullScreen() {

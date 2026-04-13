@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="breadcrumb">
-      <breadcrumb @update:collapse="handleCollapse" />
+      <breadcrumb @update:collapse="handleCollapse" :isCollapse="isCollapse" />
     </div>
     <div class="navigation">
       <navigationBar />
@@ -15,16 +15,19 @@ import navigationBar from "./navigationBar/index.vue";
 export default {
   name: "navigation",
   components: { breadcrumb, navigationBar },
+  props: {
+    isCollapse: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
-    return {
-      isCollapse: false,
-    };
+    return {};
   },
 
   methods: {
     handleCollapse(value) {
-      this.isCollapse = value;
-      this.$emit("update:collapse", this.isCollapse);
+      this.$emit("update:collapse", value);
     },
   },
 };
