@@ -1,5 +1,10 @@
 # test-vue
 
+## download
+```
+git clone -b master https://github.com/Aurora-chi/VueWarehouse.git
+```
+
 ## Project setup
 ```
 npm install
